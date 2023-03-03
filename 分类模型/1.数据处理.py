@@ -1,5 +1,7 @@
-from base import readData
+import os
 import matplotlib.pyplot as plt
+
+from base import readData
 
 
 class DataProcess():
@@ -60,18 +62,22 @@ class DataProcess():
             perDayData.to_csv('../testData/{}/{}.csv'.format(perFile, perDay))
 
 
+    def delProData(self, perFile):
+
+        rootPath = "../testData/{}".format(perFile)
+        dataList = os.listdir(rootPath)
+        if len(dataList) > 0:
+            for i in dataList:
+                os.remove(rootPath+'/{}'.format(i))
+
 
 if __name__ == '__main__':
-    import os
-    pathDir = os.listdir("../data")[3:]
+
+    pathDir = os.listdir("../data")
     for perFile in pathDir:
         filname = '../data/{}'.format(perFile)
         dataProcess = DataProcess(filname)
         df = dataProcess.chooseNormalData(filName=filname)
-        # df.to_csv('../testData/{}'.format(filname.split('tbl_')[1]))
         print(filname)
+        dataProcess.delProData(filname.split('tbl_')[1][:-4])
         dataProcess.splitDataByDay(filname.split('tbl_')[1][:-4], df)
-
-    # dataProcess.generateLabel()
-    # dataProcess.pwrBox97(df, 'label')
-    # print(df)

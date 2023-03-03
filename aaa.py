@@ -19,5 +19,5 @@ import pandas as pd
 #     print(perDayData)
 #     break
 
-df = pd.read_table('./data/Y4_2022-07-01_tbl_pwrarrypwrcar3.txt')
+df = pd.read_table('./data/Y4_2022-07-01_tbl_pwrarrypwrcar1.txt')
 print(df['pwrBox117'].value_counts())
